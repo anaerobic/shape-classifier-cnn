@@ -27,7 +27,7 @@ classifier.add(Convolution2D(
 classifier.add(MaxPooling2D(pool_size=(2, 2)))
 
 classifier.add(Convolution2D(32, 3, 3, activation='relu'))
-classifier.add(MaxPooling2D(pool_size=(2, 2)))
+classifier.add(MaxPooling2D(pool_size=(2, 2), padding='same'))
 
 # Step - 3 Flattening
 classifier.add(Flatten())
@@ -39,7 +39,7 @@ classifier.add(Dense(3, activation='softmax', kernel_initializer='uniform'))
 
 # Compiling the CNN
 classifier.compile(
-    optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 
 
 # Image Preprocessing
@@ -64,11 +64,11 @@ early_stopping_monitor = EarlyStopping(patience=5)
 steps_per_epoch = len(training_set.filenames)  # 300
 validation_steps = len(test_set.filenames)  # 90
 
-model_info = classifier.fit_generator(training_set, steps_per_epoch=steps_per_epoch, epochs=25, validation_data=test_set,
+model_info = classifier.fit(training_set, steps_per_epoch=steps_per_epoch, epochs=25, validation_data=test_set,
                                       validation_steps=validation_steps, callbacks=[csv_logger, early_stopping_monitor])
 
 classifier.save("drawing_classification.h5")
 
 # plot model history after each epoch
-from visulization import plot_model_history
+from visualization import plot_model_history
 plot_model_history(model_info)

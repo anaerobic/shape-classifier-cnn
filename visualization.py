@@ -12,8 +12,10 @@ def plot_model_history(model_history):
     axs[0].set_title('Model Accuracy')
     axs[0].set_ylabel('Accuracy')
     axs[0].set_xlabel('Epoch')
+    # axs[0].set_xticks(np.arange(1, len(model_history.history[
+    #                   'acc']) + 1), len(model_history.history['acc']) / 10)
     axs[0].set_xticks(np.arange(1, len(model_history.history[
-                      'acc']) + 1), len(model_history.history['acc']) / 10)
+                      'acc']) + 1))
     axs[0].legend(['train', 'val'], loc='best')
     # summarize history for loss
     axs[1].plot(range(1, len(model_history.history['loss']) + 1),
@@ -23,7 +25,9 @@ def plot_model_history(model_history):
     axs[1].set_title('Model Loss')
     axs[1].set_ylabel('Loss')
     axs[1].set_xlabel('Epoch')
+    # axs[1].set_xticks(np.arange(1, len(model_history.history[
+    #                   'loss']) + 1), len(model_history.history['loss']) / 10)
     axs[1].set_xticks(np.arange(1, len(model_history.history[
-                      'loss']) + 1), len(model_history.history['loss']) / 10)
+                      'loss']) + 1))
     axs[1].legend(['train', 'val'], loc='best')
     plt.show()
